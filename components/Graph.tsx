@@ -1,25 +1,69 @@
-"use strict";
-
+"use client";
 import * as d3 from "d3";
 import React, {
   useEffect,
   useRef,
   forwardRef,
   useImperativeHandle,
+  Ref,
 } from "react";
+import { HCP, Connection, GraphData, Education, WorkExperience, GraphHandle } from "../types";
+// Types
+// interface Education {
+//   degree: string;
+//   institution: string;
+// }
 
+// interface WorkExperience {
+//   position: string;
+//   institution: string;
+// }
 
-const Graph = forwardRef(function Graph(
+// export interface HCP {
+//   id: string;
+//   name: string;
+//   specialty: string;
+//   type: "physician" | "researcher";
+//   avatar: string;
+//   education: Education[];
+//   workExperience: WorkExperience[];
+//   x?: number;
+//   y?: number;
+//   fx?: number | null;
+//   fy?: number | null;
+// }
+
+// export interface Connection {
+//   source: string | HCP;
+//   target: string | HCP;
+// }
+
+// export interface GraphData {
+//   hcps: HCP[];
+//   connections: Connection[];
+// }
+
+// export interface GraphHandle {
+//   centerNode: (nodeId: string) => void;
+// }
+
+interface GraphProps {
+  data: GraphData;
+  onNodeClick: (hcp: HCP) => void;
+  centerNodeId?: string;
+}
+
+const Graph = forwardRef<GraphHandle, GraphProps>(function Graph(
   { data, onNodeClick, centerNodeId },
   ref
 ) {
-  const svgRef = useRef(null);
-  const containerRef = useRef(null);
-  const simulationRef = useRef(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const simulationRef = useRef<d3.Simulation<HCP, undefined> | null>(null);
   const transformRef = useRef(d3.zoomIdentity);
-  const tooltipRef = useRef(null);
+  const tooltipRef = useRef<HTMLDivElement | null>(null);
 
-  const centerNode = (nodeId) => {
+  const centerNode = (nodeId: string) => {
     if (!svgRef.current || !simulationRef.current) return;
 
     const width = svgRef.current.clientWidth;
@@ -79,7 +123,7 @@ const Graph = forwardRef(function Graph(
     const container = svg.append("g");
 
     const zoom = d3
-      .zoom()
+      .zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.5, 2])
       .on("zoom", (event) => {
         transformRef.current = event.transform;
@@ -111,7 +155,7 @@ const Graph = forwardRef(function Graph(
       .attr("class", "node-group")
       .call(
         d3
-          .drag()
+          .drag<SVGGElement, HCP>()
           .on("start", dragstarted)
           .on("drag", dragged)
           .on("end", dragended)
@@ -143,30 +187,22 @@ const Graph = forwardRef(function Graph(
                 </div>
               </div>
               <div class="text-sm text-gray-700">
-                <p><span class="font-medium">Type:</span> ${
-                  d.type === "physician" ? "Physician" : "Researcher"
-                }</p>
+                <p><span class="font-medium">Type:</span> ${d.type}</p>
                 ${
                   d.education.length > 0
-                    ? `
-                  <p class="mt-1"><span class="font-medium">Education:</span> ${d.education[0].degree}, ${d.education[0].institution}</p>
-                `
+                    ? `<p class="mt-1"><span class="font-medium">Education:</span> ${d.education[0].degree}, ${d.education[0].institution}</p>`
                     : ""
                 }
                 ${
                   d.workExperience.length > 0
-                    ? `
-                  <p class="mt-1"><span class="font-medium">Position:</span> ${d.workExperience[0].position} at ${d.workExperience[0].institution}</p>
-                `
+                    ? `<p class="mt-1"><span class="font-medium">Position:</span> ${d.workExperience[0].position} at ${d.workExperience[0].institution}</p>`
                     : ""
                 }
               </div>
             </div>
           `;
-
-          const [x, y] = [event.pageX + 10, event.pageY + 10];
-          tooltipRef.current.style.left = `${x}px`;
-          tooltipRef.current.style.top = `${y}px`;
+          tooltipRef.current.style.left = `${event.pageX + 10}px`;
+          tooltipRef.current.style.top = `${event.pageY + 10}px`;
         }
       })
       .on("mouseout", function () {
@@ -177,9 +213,8 @@ const Graph = forwardRef(function Graph(
       })
       .on("mousemove", function (event) {
         if (tooltipRef.current) {
-          const [x, y] = [event.pageX + 10, event.pageY + 10];
-          tooltipRef.current.style.left = `${x}px`;
-          tooltipRef.current.style.top = `${y}px`;
+          tooltipRef.current.style.left = `${event.pageX + 10}px`;
+          tooltipRef.current.style.top = `${event.pageY + 10}px`;
         }
       });
 
@@ -240,7 +275,7 @@ const Graph = forwardRef(function Graph(
       .force(
         "link",
         d3
-          .forceLink(connections)
+          .forceLink<HCP, d3.SimulationLinkDatum<HCP>>(connections)
           .id((d) => d.id)
           .distance(120)
           .strength(0.1)
@@ -254,9 +289,9 @@ const Graph = forwardRef(function Graph(
     simulationRef.current = simulation;
 
     function ticked() {
-      link.attr("d", (d) => {
-        const source = d.source;
-        const target = d.target;
+      link.attr("d", (d: any) => {
+        const source = d.source as HCP;
+        const target = d.target as HCP;
         const sx = source.x || 0;
         const sy = source.y || 0;
         const tx = target.x || 0;
@@ -282,18 +317,18 @@ const Graph = forwardRef(function Graph(
       nodeGroups.attr("transform", (d) => `translate(${d.x || 0},${d.y || 0})`);
     }
 
-    function dragstarted(event, d) {
+    function dragstarted(event: any, d: HCP) {
       if (!event.active) simulation.alphaTarget(0.2).restart();
       d.fx = d.x;
       d.fy = d.y;
     }
 
-    function dragged(event, d) {
+    function dragged(event: any, d: HCP) {
       d.fx = event.x;
       d.fy = event.y;
     }
 
-    function dragended(event, d) {
+    function dragended(event: any, d: HCP) {
       if (!event.active) simulation.alphaTarget(0);
       d.fx = null;
       d.fy = null;
@@ -321,5 +356,4 @@ const Graph = forwardRef(function Graph(
 });
 
 Graph.displayName = "Graph";
-
 export default Graph;

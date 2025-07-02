@@ -6,24 +6,10 @@ import DetailsPanel from "../components/DetailsPanel";
 import { Search, Globe, X, ChevronDown } from "lucide-react";
 import { mockData } from "../mockData";
 import { HCP } from "../types";
-type HCP = {
-  id: string;
-  name: string;
-  avatar: string;
-  specialty: string;
-  type: "physician" | "researcher";
-  education: { degree: string; institution: string }[];
-  workExperience: { position: string; institution: string }[];
-};
-
-
-
 
 export type GraphRef = {
   centerNode: (nodeId: string) => void;
 };
-
-
 
 const avatarImages = {
   "1": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&auto=format&fit=crop",
@@ -78,21 +64,26 @@ export default function HealthcareNetwork() {
   const graphRef = useRef<{ centerNode: (nodeId: string) => void }>(null);
   const [selectedFilter, setSelectedFilter] = useState("");
 
-  const enhancedMockData = useMemo(() => ({
-    ...mockData,
-    hcps: mockData.hcps.map((hcp) => ({
-      ...hcp,
-      avatar: avatarImages[hcp.id as keyof typeof avatarImages],
-      successRate: Math.floor(Math.random() * 30) + 70,
-      patientsServed: Math.floor(Math.random() * 500) + 100,
-      categories: ["Cardiology", "Neurology", "Oncology"].slice(
-        0,
-        Math.floor(Math.random() * 2) + 1
-      ),
-      about:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    })),
-  }), []);
+  const enhancedMockData = useMemo(
+    () => ({
+      ...mockData,
+      hcps: mockData.hcps.map((hcp) => ({
+        ...hcp,
+        avatar: avatarImages[hcp.id as keyof typeof avatarImages],
+        successRate: Math.floor(Math.random() * 30) + 70,
+        patientsServed: Math.floor(Math.random() * 500) + 100,
+        categories: ["Cardiology", "Neurology", "Oncology"].slice(
+          0,
+          Math.floor(Math.random() * 2) + 1
+        ),
+        about:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        specialty: hcp.specialty ?? "General",
+        type: hcp.type === "administrator" ? "physician" : hcp.type,
+      })),
+    }),
+    []
+  );
 
   const handleSearch = useCallback(() => {
     const foundHCP = enhancedMockData.hcps.find((hcp) =>
@@ -206,12 +197,9 @@ export default function HealthcareNetwork() {
           />
           <div className="absolute inset-0 z-10">
             <Graph
-              ref={graphRef}
               data={enhancedMockData}
-              onNodeClick={(hcp) => {
-                setSelectedHCP(hcp);
-              }}
-              centerNodeId={centerNodeId}
+              onNodeClick={(hcp) => setSelectedHCP(hcp)}
+              centerNodeId={centerNodeId ?? undefined} // <-- convert null to undefined here
             />
           </div>
         </div>

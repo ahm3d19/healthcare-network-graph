@@ -18,17 +18,33 @@ export interface WorkExperience {
   endYear?: number;
 }
 
-export interface HCP {
+// export interface HCP {
+//   id: string;
+//   name: string;
+//   type: "physician" | "researcher" | "administrator";
+//   specialty?: string;
+//   education: Education[];
+//   workExperience: WorkExperience[];
+//   publications: Publication[];
+//   avatar?: string; // Add avatar property
+// }
+export type HCP = {
   id: string;
   name: string;
   type: "physician" | "researcher" | "administrator";
-  specialty?: string;
+  
+  specialty?: string; // <-- make it optional
   education: Education[];
   workExperience: WorkExperience[];
   publications: Publication[];
-  avatar?: string; // Add avatar property
-}
 
+  // Add the extra fields you're injecting
+  avatar?: string;
+  successRate?: number;
+  patientsServed?: number;
+  categories?: string[];
+  about?: string;
+};
 export interface Connection {
   source: string;
   target: string;
@@ -44,6 +60,13 @@ export interface Connection {
 }
 
 export interface MockData {
+  hcps: HCP[];
+  connections: Connection[];
+}
+export interface GraphHandle {
+  centerNode: (nodeId: string) => void;
+}
+export interface GraphData {
   hcps: HCP[];
   connections: Connection[];
 }
