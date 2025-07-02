@@ -26,6 +26,7 @@ export interface HCP {
   education: Education[];
   workExperience: WorkExperience[];
   publications: Publication[];
+  avatar?: string; // Add avatar property
 }
 
 export interface Connection {
