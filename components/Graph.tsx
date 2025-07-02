@@ -7,7 +7,14 @@ import React, {
   useImperativeHandle,
   Ref,
 } from "react";
-import { HCP, Connection, GraphData, Education, WorkExperience, GraphHandle } from "../types";
+import {
+  HCP,
+  Connection,
+  GraphData,
+  Education,
+  WorkExperience,
+  GraphHandle,
+} from "../types";
 // Types
 // interface Education {
 //   degree: string;
@@ -97,7 +104,8 @@ const Graph = forwardRef<GraphHandle, GraphProps>(function Graph(
     transformRef.current = d3.zoomIdentity;
     d3.select(svgRef.current)
       .select("g")
-      .attr("transform", transformRef.current);
+      .attr("transform", transformRef.current.toString());
+
     simulationRef.current.alpha(1).restart();
   };
 

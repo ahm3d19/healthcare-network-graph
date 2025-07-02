@@ -125,66 +125,65 @@ export default function HealthcareNetwork() {
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
         <header className="bg-white border-b border-gray-100 z-10">
-          <div className="px-6 py-4 flex items-center justify-between">
-            {/* Logo + Title */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-br from-sky-500 rounded-lg shadow-sm">
-                  <Globe className="h-5 w-5 text-white" />
-                </div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-sky-300 to-sky-800 bg-clip-text text-transparent">
-                  Global Health Network
-                </h1>
-              </div>
-            </div>
+  <div className="px-4 sm:px-6 py-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    {/* Logo + Title */}
+    <div className="flex items-center gap-3">
+      <div className="p-2 bg-gradient-to-br from-sky-500 rounded-lg shadow-sm">
+        <Globe className="h-5 w-5 text-white" />
+      </div>
+      <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-sky-300 to-sky-800 bg-clip-text text-transparent">
+        Global Health Network
+      </h1>
+    </div>
 
-            {/* Search + Filter */}
-            <div className="flex items-center gap-4">
-              {/* Search Bar */}
-              <div className="relative w-80">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                  <Search className="h-4 w-4 text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Search doctors, specialties..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  className="w-full pl-11 pr-10 py-2.5 text-sm rounded-full border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200 shadow-sm hover:shadow-md"
-                />
-                {searchTerm && (
-                  <button
-                    onClick={() => setSearchTerm("")}
-                    className="absolute inset-y-0 right-0 flex items-center pr-3"
-                  >
-                    <X className="h-4 w-4 text-gray-400 hover:text-gray-600" />
-                  </button>
-                )}
-              </div>
+    {/* Search + Filter */}
+    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+      {/* Search Bar */}
+      <div className="relative w-full sm:w-80">
+        <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+          <Search className="h-4 w-4 text-gray-400" />
+        </div>
+        <input
+          type="text"
+          placeholder="Search doctors, specialties..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          className="w-full pl-11 pr-10 py-2.5 text-sm rounded-full border border-gray-200 focus:border-sky-400 focus:ring-2 focus:ring-blue-100 outline-none transition-all duration-200 shadow-sm hover:shadow-md"
+        />
+        {searchTerm && (
+          <button
+            onClick={() => setSearchTerm("")}
+            className="absolute inset-y-0 right-0 flex items-center pr-3"
+          >
+            <X className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+          </button>
+        )}
+      </div>
 
-              {/* Modern Filter Dropdown */}
-              <div className="relative w-56">
-                <select
-                  value={selectedFilter}
-                  onChange={(e) => setSelectedFilter(e.target.value)}
-                  className="appearance-none w-full text-sm pl-4 pr-10 py-2.5 rounded-full border border-gray-200 bg-white text-gray-700 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-blue-100 transition-all duration-200 shadow-sm hover:shadow-md"
-                >
-                  <option value="">All Specialties</option>
-                  <option value="Cardiology">Cardiology</option>
-                  <option value="Neurology">Neurology</option>
-                  <option value="Oncology">Oncology</option>
-                  <option value="Pediatrics">Pediatrics</option>
-                  <option value="Psychiatry">Psychiatry</option>
-                  <option value="Dermatology">Dermatology</option>
-                </select>
-                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
+      {/* Filter Dropdown */}
+      <div className="relative w-full sm:w-56">
+        <select
+          value={selectedFilter}
+          onChange={(e) => setSelectedFilter(e.target.value)}
+          className="appearance-none w-full text-sm pl-4 pr-10 py-2.5 rounded-full border border-gray-200 bg-white text-gray-700 focus:outline-none focus:border-sky-400 focus:ring-2 focus:ring-blue-100 transition-all duration-200 shadow-sm hover:shadow-md"
+        >
+          <option value="">All Specialties</option>
+          <option value="Cardiology">Cardiology</option>
+          <option value="Neurology">Neurology</option>
+          <option value="Oncology">Oncology</option>
+          <option value="Pediatrics">Pediatrics</option>
+          <option value="Psychiatry">Psychiatry</option>
+          <option value="Dermatology">Dermatology</option>
+        </select>
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
+          <ChevronDown className="h-4 w-4 text-gray-400" />
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
 
         {/* Graph Visualization */}
         <div className="flex-1 relative bg-gray-50">
@@ -199,7 +198,7 @@ export default function HealthcareNetwork() {
             <Graph
               data={enhancedMockData}
               onNodeClick={(hcp) => setSelectedHCP(hcp)}
-              centerNodeId={centerNodeId ?? undefined} // <-- convert null to undefined here
+              centerNodeId={centerNodeId ?? undefined} 
             />
           </div>
         </div>

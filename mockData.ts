@@ -96,6 +96,9 @@ export const mockData: MockData = {
           startYear: 2015,
         },
       ],
+      publications: [
+        { id: "p5", title: "Childhood Vaccination Trends", year: 2019 },
+      ],
     },
     {
       id: "6",
@@ -157,6 +160,10 @@ export const mockData: MockData = {
           startYear: 2013,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
+      
     },
     {
       id: "9",
@@ -200,8 +207,11 @@ export const mockData: MockData = {
           startYear: 2014,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
-    // Continuing with more HCPs up to 100...
+   
     {
       id: "11",
       name: "Dr. Jennifer Adams",
@@ -220,6 +230,9 @@ export const mockData: MockData = {
           institution: "Kaiser Permanente",
           startYear: 2012,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -287,6 +300,9 @@ export const mockData: MockData = {
           startYear: 2013,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "15",
@@ -345,6 +361,9 @@ export const mockData: MockData = {
           startYear: 2016,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "18",
@@ -365,6 +384,9 @@ export const mockData: MockData = {
           startYear: 2012,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "19",
@@ -380,6 +402,9 @@ export const mockData: MockData = {
           institution: "Mayo Clinic",
           startYear: 2015,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -420,6 +445,9 @@ export const mockData: MockData = {
           startYear: 2013,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "22",
@@ -436,6 +464,9 @@ export const mockData: MockData = {
           startYear: 2014,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "23",
@@ -449,6 +480,9 @@ export const mockData: MockData = {
           institution: "Dana-Farber Cancer Institute",
           startYear: 2018,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -466,6 +500,9 @@ export const mockData: MockData = {
           startYear: 2012,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "25",
@@ -481,6 +518,10 @@ export const mockData: MockData = {
           institution: "Brigham and Women's Hospital",
           startYear: 2015,
         },
+        
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -497,6 +538,9 @@ export const mockData: MockData = {
           institution: "Broad Institute",
           startYear: 2017,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -518,6 +562,9 @@ export const mockData: MockData = {
           startYear: 2013,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "28",
@@ -531,6 +578,9 @@ export const mockData: MockData = {
           institution: "Hospital for Special Surgery",
           startYear: 2014,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -548,6 +598,9 @@ export const mockData: MockData = {
           startYear: 2019,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "30",
@@ -564,6 +617,9 @@ export const mockData: MockData = {
           startYear: 2011,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "31",
@@ -578,6 +634,9 @@ export const mockData: MockData = {
           startYear: 2015,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "32",
@@ -591,6 +650,9 @@ export const mockData: MockData = {
           institution: "Broad Institute",
           startYear: 2018,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -608,6 +670,9 @@ export const mockData: MockData = {
           startYear: 2014,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "34",
@@ -623,6 +688,9 @@ export const mockData: MockData = {
           institution: "Brigham and Women's Hospital",
           startYear: 2013,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -640,6 +708,9 @@ export const mockData: MockData = {
           startYear: 2017,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "36",
@@ -656,6 +727,9 @@ export const mockData: MockData = {
           startYear: 2012,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "37",
@@ -671,6 +745,9 @@ export const mockData: MockData = {
           institution: "Shirley Ryan AbilityLab",
           startYear: 2015,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
     {
@@ -692,6 +769,9 @@ export const mockData: MockData = {
           startYear: 2019,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "39",
@@ -708,6 +788,9 @@ export const mockData: MockData = {
           startYear: 2014,
         },
       ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
+      ],
     },
     {
       id: "40",
@@ -723,6 +806,9 @@ export const mockData: MockData = {
           institution: "Cleveland Clinic",
           startYear: 2011,
         },
+      ],
+      publications: [
+        { id: "p8", title: "Maternal Health Outcomes", year: 2018 },
       ],
     },
   ],
